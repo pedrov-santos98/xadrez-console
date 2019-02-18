@@ -19,5 +19,11 @@ namespace tabuleiro
 
         }
 
+        // METODO PARA ACESSAR 
+
+        public  Peca peca(int linha, int coluna)
+        {
+            return pecas[linha, coluna];
+        }
     }
 }
