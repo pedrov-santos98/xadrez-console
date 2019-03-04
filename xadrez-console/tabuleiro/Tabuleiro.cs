@@ -53,6 +53,20 @@ namespace tabuleiro
             return peca(pos) != null;
         }
 
+        // METODO PARA RETIRAR PEÇA
+
+        public Peca retirarPeca(Posicao pos)
+        {
+            // Verificar se existe peça para retirar
+            if (peca(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
+        }
 
         // METODO PARA TESTAR SE UMA POSIÇÃO É VALIDA DENTRO DA MATRIZ (0,0),(7,7)
 
