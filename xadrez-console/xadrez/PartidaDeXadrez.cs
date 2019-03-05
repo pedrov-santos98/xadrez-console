@@ -8,8 +8,8 @@ namespace xadrez
     {
 
         public Tabuleiro tab { get; private set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public int turno { get; private set; }
+        public Cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
 
         public PartidaDeXadrez()
@@ -27,6 +27,50 @@ namespace xadrez
             p.incrementarQteMovimentos();
             Peca pecaCapturada = tab.retirarPeca(destino);
             tab.colocarPeca(p, destino);
+        }
+
+        public void realizaJogada(Posicao origem, Posicao destino)
+        {
+            ExecutaMovimento(origem, destino);
+            turno++;
+            mudaJogador();
+        }
+
+        public void validarPosicaoDeOrigem(Posicao pos)
+        {
+            if (tab.peca(pos) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!" + "\n" + "Aperte ENTER para nova tentativa");
+            }
+            if(jogadorAtual != tab.peca(pos).cor)
+            {
+                throw new TabuleiroException("A peça de origem escohilda não é sua" + "\n" + "Aperte ENTER para nova tentativa");
+
+            }
+            if (!tab.peca(pos).existeMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não há movimentos possíveis para peça de origem escolhida!" + "\n" + "Aperte ENTER para nova tentativa");
+            }
+        }
+
+        public void validarPosicaoDeDestino(Posicao origem, Posicao destino)
+        {
+            if (!tab.peca(origem).podeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posicao de destino inválida" + "\n" + "Aperte ENTER para nova tentativa");
+            }
+        }
+
+        private void mudaJogador()
+        {
+            if (jogadorAtual == Cor.Branca)
+            {
+                jogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                jogadorAtual = Cor.Branca;
+            }
         }
 
         private void colocarPecas()
