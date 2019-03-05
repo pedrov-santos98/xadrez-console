@@ -5,7 +5,7 @@ using tabuleiro;
 
 namespace tabuleiro
 {
-    class Peca
+   abstract class Peca
     {
         public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }
@@ -20,9 +20,20 @@ namespace tabuleiro
             this.qtdMovimentos = 0;
         }
 
+
+        // METODO ABSTRATO PARA VERIFICAR LUGARES POSSÍVEIS QUE A PEÇA PODE IR
+
+     
+
         public void incrementarQteMovimentos()
         {
             qtdMovimentos++;
         }
+
+
+        public abstract bool[,] movimentosPossiveis();
+
+
+
     }
 }
