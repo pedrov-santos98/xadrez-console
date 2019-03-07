@@ -52,6 +52,7 @@ namespace tabuleiro
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
 
+      
         public abstract bool[,] movimentosPossiveis();
 
 
